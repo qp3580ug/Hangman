@@ -1,0 +1,12 @@
+.select-box select {
+    background-color: blue;
+    width: 268px;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   color: aqua;
+}
+
+.game-title{
+    color: darkred;
+}

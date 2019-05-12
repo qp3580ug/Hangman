@@ -1,0 +1,36 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<title>Hangman Fun!!</title> 
+<link rel="stylesheet" type="text/css" href="styles/hangman.css">  
+<script type="text/JavaScript" src="javascript/Hangman.js"></script> 
+  
+</head> 
+  
+<body> 
+    <img src='' style='float: right; margin: 0px 0px 0px 0px; width: 700px; height: 700px' id='hangmanImg'>
+    <h1 class='game-title' id='hangmanTitle'>Hangman Fun!!</h1> 
+
+    <div class="select-box" style="width:400px;" >
+        <select onchange="newGame(this)" id="selectBox" style="display: block">
+            <option>Select Category...</option>
+            <option value="Animals">Animals</option>
+            <option value="Food">Food</option>
+            <option value="Holidays">Holidays</option>
+        </select>
+    </div>
+
+    <div id='selectLetter' style='display: none'>
+        <p id="secretWord" style="display: none"></p>
+        <input type="text" name="enteredLetter" id="enteredLetter" onclick="this.value=''">
+        <input type="submit" id="enterletter" onclick="enterLetter()" value="Enter Letter!">
+    </div>
+
+    <p id="selectedWord" style='font-size: xx-large'></p>
+    <p id="selectedLetter" style='font-size: xx-large'></p>
+    <p id='isIn' style='font-size: xx-large'></p>
+    <button id="newGameButton" style='display: none' onclick="resetGame()">New Game</button>
+ 
+</body> 
+  
+</html>
