@@ -1,5 +1,6 @@
 lettersUsed = []
 var wrongAnswers = 0
+var alphabetArray = "abcdefghijklmnopqrstuvwxyz".split("")
 
 function newGame(selectObject){
   var value = selectObject.value;
@@ -34,6 +35,7 @@ function getElementsById(value, randomWord){
   document.getElementById("selectBox").style.display = 'none';
   document.getElementById('selectLetter').style.display = 'block';
   document.getElementById('secretWord').innerHTML = randomWord;
+  changeAutofocus()
 }
 
 function blankOutWord(randomWord){
@@ -46,67 +48,85 @@ function blankOutWord(randomWord){
 }
 
 function enterLetter(){
+  changeAutofocus()
   var randomWord = document.getElementById("secretWord").innerHTML;
   var enteredLetter = document.getElementById("enteredLetter").value;
   var blankWord = document.getElementById('selectedWord').innerHTML;
-  lettersUsed.push(' ' + enteredLetter)
-  document.getElementById('selectedLetter').innerHTML = "Letters Used: " + lettersUsed;
-  for (let i = 0; i <= randomWord.length; i++){
-    var wordCharArray = randomWord.split('');
-    var blankCharArray = blankWord.split('');
+  lettersUsed.push(enteredLetter)
+  if (alphabetArray.indexOf(enteredLetter) != -1){
+    if (lettersUsed.indexOf(enteredLetter) == -1){
+      alert('You have already tried that letter!!')
     }
-  if (wordCharArray.indexOf(enteredLetter) != -1){
-    for (let i = 0; i <= wordCharArray.length; i++){
-      if (wordCharArray[i] === enteredLetter){
-        blankCharArray.splice(i, 1, enteredLetter);
-        document.getElementById('isIn').innerHTML =  enteredLetter + " is in the word!";
-        wordWithLetter = blankCharArray.toString();
-        for (i = 0; i <= wordWithLetter.length; i++){
-          wordWithLetter = wordWithLetter.replace(',', '')
+    else{
+      for (let i = 0; i <= randomWord.length; i++){
+        var wordCharArray = randomWord.split('');
+        var blankCharArray = blankWord.split('');
         }
-        document.getElementById('selectedWord').innerHTML = wordWithLetter;
-        if (wordWithLetter === randomWord){
-          document.getElementById('isIn').innerHTML = "Congrats!! You Won!!";
-          document.getElementById('selectLetter').style.display = 'none';
+      if (wordCharArray.indexOf(enteredLetter) != -1){
+        for (let i = 0; i <= wordCharArray.length; i++){
+          if (wordCharArray[i] === enteredLetter){
+            blankCharArray.splice(i, 1, enteredLetter);
+            document.getElementById('isIn').innerHTML =  enteredLetter + " is in the word!";
+            wordWithLetter = blankCharArray.toString();
+            for (i = 0; i <= wordWithLetter.length; i++){
+              wordWithLetter = wordWithLetter.replace(',', '')
+            }
+            document.getElementById('selectedWord').innerHTML = wordWithLetter;
+            if (wordWithLetter === randomWord){
+              document.getElementById('isIn').innerHTML = "Congrats!! You Won!!";
+              document.getElementById('selectLetter').style.display = 'none';
+            }
+          }
+        }
+      }
+      else{
+        wrongAnswers += 1;
+        if(wrongAnswers === 1){
+          document.getElementById('hangmanImg').src = 'pictures/noose.png'
+          document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
+        }
+        if(wrongAnswers === 2){
+          document.getElementById('hangmanImg').src = 'pictures/head.png'
+          document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
+        }
+        if(wrongAnswers === 3){
+          document.getElementById('hangmanImg').src = 'pictures/body.png'
+          document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
+        }
+        if(wrongAnswers === 4){
+          document.getElementById('hangmanImg').src = 'pictures/oneArm.png'
+          document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
+        }
+        if(wrongAnswers === 5){
+          document.getElementById('hangmanImg').src = 'pictures/bothArms.png'
+          document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
+        }
+        if(wrongAnswers === 6){
+          document.getElementById('hangmanImg').src = 'pictures/oneLeg.png'
+          document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
+        }
+        if(wrongAnswers === 7){
+          document.getElementById('hangmanImg').src = 'pictures/bothLegs.png'
+          document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
+        }
+        if(wrongAnswers === 8){
+          document.getElementById('hangmanImg').src = 'pictures/lost.png';
+          document.getElementById('isIn').innerHTML = "Oh No! You Lost!";
+          document.getElementById('selectLetter').style.display = 'none';      
         }
       }
     }
+    document.getElementById('selectedLetter').innerHTML = "Letters Used: " + lettersUsed;
+
+    
   }
-  else{
-    wrongAnswers += 1;
-    if(wrongAnswers === 1){
-      document.getElementById('hangmanImg').src = 'pictures/noose.png'
-      document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
-    }
-    if(wrongAnswers === 2){
-      document.getElementById('hangmanImg').src = 'pictures/head.png'
-      document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
-    }
-    if(wrongAnswers === 3){
-      document.getElementById('hangmanImg').src = 'pictures/body.png'
-      document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
-    }
-    if(wrongAnswers === 4){
-      document.getElementById('hangmanImg').src = 'pictures/oneArm.png'
-      document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
-    }
-    if(wrongAnswers === 5){
-      document.getElementById('hangmanImg').src = 'pictures/bothArms.png'
-      document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
-    }
-    if(wrongAnswers === 6){
-      document.getElementById('hangmanImg').src = 'pictures/oneLeg.png'
-      document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
-    }
-    if(wrongAnswers === 7){
-      document.getElementById('hangmanImg').src = 'pictures/bothLegs.png'
-      document.getElementById('isIn').innerHTML = enteredLetter + ' is not in the word!'
-    }
-    if(wrongAnswers === 8){
-      document.getElementById('hangmanImg').src = 'pictures/lost.png';
-      document.getElementById('isIn').innerHTML = "Oh No! You Lost!";
-      document.getElementById('selectLetter').style.display = 'none';      
-    }
+  else {
+    alert('Please enter a Letter!!')
   }
   
+  
+}
+
+function changeAutofocus() {
+  document.getElementById("enteredLetter").focus();
 }
