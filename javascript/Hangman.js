@@ -52,8 +52,8 @@ function enterLetter(){
   var randomWord = document.getElementById("secretWord").innerHTML;
   var enteredLetter = document.getElementById("enteredLetter").value;
   var blankWord = document.getElementById('selectedWord').innerHTML;
-  lettersUsed.push(enteredLetter)
   if (alphabetArray.indexOf(enteredLetter) != -1){
+    lettersUsed.push(enteredLetter)
     if (lettersUsed.indexOf(enteredLetter) == -1){
       alert('You have already tried that letter!!')
     }

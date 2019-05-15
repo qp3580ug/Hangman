@@ -9,4 +9,10 @@
 
 .game-title{
     color: darkred;
+    background-color: black;
 }
+
+body {
+    background-color: darkgreen;
+}
+
